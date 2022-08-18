@@ -9,7 +9,7 @@ function TaskCard({ task }) {
       <h1 className="text-xl  font-bold capitalize">{task.title}</h1>
       <p className=" text-gray-500 text-sm ">{task.description}</p>
       <button
-        className=" bg-red-500 px-2 py-1 rounded-md mt-4 hover:bg-red-400 "
+        className=" text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 "
         onClick={() => deleteTask(task.id)}
       >
         Delete task

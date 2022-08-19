@@ -1,9 +1,10 @@
 import TaskCard from "./TaskCard";
 import { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
+import { Droppable } from "react-beautiful-dnd";
 
 function TaskList() {
-  const { tasks } = useContext(TaskContext);
+  const { tasks, completedTasks, setCompletedTasks } = useContext(TaskContext);
 
   if (tasks.length === 0) {
     return (
@@ -14,11 +15,25 @@ function TaskList() {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 ">
-      {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
-      ))}
-    </div>
+    <main className="text-white flex">
+      <Droppable droppableId="TaskList">
+        {(provided) => (
+          <article
+            className="flex-1"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            <h1>tasks</h1>
+            <div className="flex flex-col gap-4 p-4 bg-slate-700 rounded-lg">
+              {tasks.map((task, index) => (
+                <TaskCard index={index} key={task.id} task={task} />
+              ))}
+            </div>
+            {provided.placeholder}
+          </article>
+        )}
+      </Droppable>
+    </main>
   );
 }
 
